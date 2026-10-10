@@ -3,14 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
   <meta name="description" content="Portal de Trabajos Prácticos de Análisis Numérico - Grupo 11. Acceso centralizado a aplicaciones interactivas de Jacobi, Gauss-Seidel, Ajuste Alométrico y Método de Euler.">
   <title>Análisis Numérico: TP's del grupo 11</title>
+  
+  <!-- Script anti-FOUC (Previene parpadeo de tema antes del render) -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('an-theme');
+        const theme = savedTheme ? savedTheme : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+        const metaScheme = document.querySelector('meta[name="color-scheme"]');
+        if (metaScheme) metaScheme.content = theme;
+      } catch (e) {}
+    })();
+  </script>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
+  <!-- KaTeX CSS (Renderizado de fórmulas matemáticas) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+  
+  <!-- KaTeX JS y Extensión Auto-render -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous" onload="if (window.renderKaTeXFormulas) window.renderKaTeXFormulas();"></script>
+
   <!-- CSS Principal -->
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -30,10 +51,38 @@
         <span>Ingeniería en Sistemas de Información • 3er Año</span>
       </div>
       
-      <h1 class="main-title">
-        <span class="gradient-text">Análisis Numérico:</span><br>
-        TP's del grupo 11
-      </h1>
+      <div class="title-container">
+        <h1 class="main-title">
+          <span class="gradient-text">Análisis Numérico:</span><br>
+          TP's del grupo 11
+        </h1>
+
+        <!-- Botón de Alternancia de Tema (Modo Claro / Modo Oscuro) -->
+        <button id="theme-toggle-btn" class="theme-toggle-btn" type="button" role="switch" aria-checked="false" aria-label="Cambiar a modo claro" title="Cambiar a modo claro">
+          <span class="toggle-track">
+            <span class="toggle-icon toggle-icon-sun" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            </span>
+            <span class="toggle-icon toggle-icon-moon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </span>
+            <span class="toggle-thumb" aria-hidden="true"></span>
+          </span>
+          <span class="sr-only">Alternar tema claro y oscuro</span>
+        </button>
+      </div>
       
       <p class="subtitle">
         Plataforma centralizada de proyectos y simuladores matemáticos desarrollados por el <strong>Grupo 11</strong>. Seleccioná una de las tarjetas para acceder a su aplicación interactiva desplegada en la nube.
@@ -129,12 +178,12 @@
               <h3 class="card-title">Ajuste Alométrico (Caso 4)</h3>
               <p class="card-subtitle-text">Clústeres de Animales</p>
               <p class="card-description">
-                Ajuste no lineal por ley de potencias $y = b \cdot x^\alpha$ y técnicas de agrupamiento morfométrico sobre datos biológicos de diferentes especies.
+                Ajuste no lineal mediante modelo potencial $y = a \cdot x^b$ y técnicas de agrupamiento morfométrico sobre datos biológicos de diferentes especies.
               </p>
             </div>
 
             <div class="card-tags">
-              <span class="tag">Regresión</span>
+              <span class="tag">Ajuste Potencial</span>
               <span class="tag">Clustering</span>
               <span class="tag">Alometría</span>
             </div>
@@ -173,7 +222,7 @@
               <h3 class="card-title">Método de Euler</h3>
               <p class="card-subtitle-text">Ecuaciones Diferenciales Ordinarias</p>
               <p class="card-description">
-                Aproximación de soluciones para Problemas de Valor Inicial (PVI) mediante aproximación por pendientes tangentes y control del tamaño de paso $h$.
+                Aproximación de soluciones para Problemas de Valor Inicial (PVI) mediante aproximación por pendientes tangentes $y_{n+1} = y_n + h \cdot f(t_n, y_n)$ y control del tamaño de paso $h$.
               </p>
             </div>
 
