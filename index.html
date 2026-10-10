@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="dark light">
-  <meta name="description" content="Portal de Trabajos Prácticos de Análisis Numérico - Grupo 11. Acceso centralizado a aplicaciones interactivas de Jacobi, Gauss-Seidel, Ajuste Alométrico y Método de Euler.">
+  <meta name="description"
+    content="Portal de Trabajos Prácticos de Análisis Numérico - Grupo 11. Acceso centralizado a aplicaciones interactivas de Jacobi, Gauss-Seidel, Ajuste Alométrico y Método de Euler.">
   <title>Análisis Numérico: TP's del grupo 11</title>
-  
+
   <!-- Script anti-FOUC (Previene parpadeo de tema antes del render) -->
   <script>
-    (function() {
+    (function () {
       try {
         const savedTheme = localStorage.getItem('an-theme');
         const theme = savedTheme ? savedTheme : 'dark';
         document.documentElement.setAttribute('data-theme', theme);
         const metaScheme = document.querySelector('meta[name="color-scheme"]');
         if (metaScheme) metaScheme.content = theme;
-      } catch (e) {}
+      } catch (e) { }
     })();
   </script>
-  
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
   <!-- KaTeX CSS (Renderizado de fórmulas matemáticas) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
-  
+
   <!-- KaTeX JS y Extensión Auto-render -->
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous" onload="if (window.renderKaTeXFormulas) window.renderKaTeXFormulas();"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="if (window.renderKaTeXFormulas) window.renderKaTeXFormulas();"></script>
 
   <!-- CSS Principal -->
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <!-- Fondo con efectos de iluminación y malla geométrica -->
   <div class="ambient-background" aria-hidden="true">
@@ -50,7 +56,7 @@
         <span class="badge-dot"></span>
         <span>Ingeniería en Sistemas de Información • 3er Año</span>
       </div>
-      
+
       <div class="title-container">
         <h1 class="main-title">
           <span class="gradient-text">Análisis Numérico:</span><br>
@@ -58,10 +64,12 @@
         </h1>
 
         <!-- Botón de Alternancia de Tema (Modo Claro / Modo Oscuro) -->
-        <button id="theme-toggle-btn" class="theme-toggle-btn" type="button" role="switch" aria-checked="false" aria-label="Cambiar a modo claro" title="Cambiar a modo claro">
+        <button id="theme-toggle-btn" class="theme-toggle-btn" type="button" role="switch" aria-checked="false"
+          aria-label="Cambiar a modo claro" title="Cambiar a modo claro">
           <span class="toggle-track">
             <span class="toggle-icon toggle-icon-sun" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
                 <circle cx="12" cy="12" r="5"></circle>
                 <line x1="12" y1="1" x2="12" y2="3"></line>
                 <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -74,7 +82,8 @@
               </svg>
             </span>
             <span class="toggle-icon toggle-icon-moon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
               </svg>
             </span>
@@ -83,9 +92,10 @@
           <span class="sr-only">Alternar tema claro y oscuro</span>
         </button>
       </div>
-      
+
       <p class="subtitle">
-        Plataforma centralizada de proyectos y simuladores matemáticos desarrollados por el <strong>Grupo 11</strong>. Seleccioná una de las tarjetas para acceder a su aplicación interactiva desplegada en la nube.
+        Plataforma centralizada de proyectos y simuladores matemáticos desarrollados por el <strong>Grupo 11</strong>.
+        Seleccioná una de las tarjetas para acceder a su aplicación interactiva desplegada en la nube.
       </p>
 
       <!-- Metadatos rápidos -->
@@ -110,17 +120,19 @@
     <!-- Contenedor Principal de Cards -->
     <main class="cards-section" id="tps-container">
       <h2 class="sr-only">Listado de Trabajos Prácticos</h2>
-      
+
       <div class="cards-grid">
         <!-- Card 1: Jacobi y Gauss Seidel -->
         <article class="card live-card" data-card-id="1">
-          <a href="https://analisis-numerico-tp-2.vercel.app/" target="_blank" rel="noopener noreferrer" class="card-link" aria-label="Abrir TP 1: Métodos de Jacobi y Gauss Seidel en una nueva pestaña">
+          <a href="https://analisis-numerico-tp-2.vercel.app/" target="_blank" rel="noopener noreferrer"
+            class="card-link" aria-label="Abrir TP 1: Métodos de Jacobi y Gauss Seidel en una nueva pestaña">
             <div class="card-header">
               <div class="card-icon icon-jacobi">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/>
-                  <path d="M3 9h18"/>
-                  <path d="M9 21V9"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <path d="M3 9h18" />
+                  <path d="M9 21V9" />
                 </svg>
               </div>
               <div class="status-chip status-active">
@@ -133,7 +145,8 @@
               <span class="tp-number">Módulo 01</span>
               <h3 class="card-title">Métodos de Jacobi y Gauss Seidel</h3>
               <p class="card-description">
-                Resolución iterativa de sistemas lineales $Ax = b$. Análisis de convergencia, diagonal dominante y visualización comparativa de iteraciones.
+                Resolución iterativa de sistemas lineales $Ax = b$. Análisis de convergencia, diagonal dominante y
+                visualización comparativa de iteraciones.
               </p>
             </div>
 
@@ -146,9 +159,10 @@
             <div class="card-footer">
               <span class="action-text">Ingresar a la aplicación</span>
               <div class="action-arrow">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="7" y1="17" x2="17" y2="7"/>
-                  <polyline points="7 7 17 7 17 17"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <line x1="7" y1="17" x2="17" y2="7" />
+                  <polyline points="7 7 17 7 17 17" />
                 </svg>
               </div>
             </div>
@@ -157,14 +171,17 @@
 
         <!-- Card 2: Ajuste alometrico -->
         <article class="card live-card" data-card-id="2">
-          <a href="https://frontend-a7bb6ql8p-omar-gith.vercel.app/" target="_blank" rel="noopener noreferrer" class="card-link" aria-label="Abrir TP 2: Ajuste alométrico (caso 4) Clústeres de animales en una nueva pestaña">
+          <a href="https://frontend-a7bb6ql8p-omar-gith.vercel.app/" target="_blank" rel="noopener noreferrer"
+            class="card-link"
+            aria-label="Abrir TP 2: Ajuste alométrico (caso 4) Clústeres de animales en una nueva pestaña">
             <div class="card-header">
               <div class="card-icon icon-alometrico">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M3 3v18h18"/>
-                  <path d="M19 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
-                  <path d="M13 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
-                  <path d="M7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 3v18h18" />
+                  <path d="M19 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                  <path d="M13 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                  <path d="M7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
                 </svg>
               </div>
               <div class="status-chip status-active">
@@ -178,7 +195,8 @@
               <h3 class="card-title">Ajuste Alométrico (Caso 4)</h3>
               <p class="card-subtitle-text">Clústeres de Animales</p>
               <p class="card-description">
-                Ajuste no lineal mediante modelo potencial $y = a \cdot x^b$ y técnicas de agrupamiento morfométrico sobre datos biológicos de diferentes especies.
+                Ajuste no lineal mediante modelo potencial $y = a \cdot x^b$ y técnicas de agrupamiento morfométrico
+                sobre datos biológicos de diferentes especies.
               </p>
             </div>
 
@@ -191,9 +209,10 @@
             <div class="card-footer">
               <span class="action-text">Ingresar a la aplicación</span>
               <div class="action-arrow">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="7" y1="17" x2="17" y2="7"/>
-                  <polyline points="7 7 17 7 17 17"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <line x1="7" y1="17" x2="17" y2="7" />
+                  <polyline points="7 7 17 7 17 17" />
                 </svg>
               </div>
             </div>
@@ -202,13 +221,15 @@
 
         <!-- Card 3: Metodo de Euler -->
         <article class="card live-card" data-card-id="3">
-          <a href="https://metodo-euler-grupo11.vercel.app/" target="_blank" rel="noopener noreferrer" class="card-link" aria-label="Abrir TP 3: Método de Euler en una nueva pestaña">
+          <a href="https://metodo-euler-grupo11.vercel.app/" target="_blank" rel="noopener noreferrer" class="card-link"
+            aria-label="Abrir TP 3: Método de Euler en una nueva pestaña">
             <div class="card-header">
               <div class="card-icon icon-euler">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M3 19c3.5 0 6-3 8-7s5-7 10-7"/>
-                  <circle cx="11" cy="12" r="2"/>
-                  <circle cx="21" cy="5" r="2"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 19c3.5 0 6-3 8-7s5-7 10-7" />
+                  <circle cx="11" cy="12" r="2" />
+                  <circle cx="21" cy="5" r="2" />
                 </svg>
               </div>
               <div class="status-chip status-active">
@@ -222,7 +243,8 @@
               <h3 class="card-title">Método de Euler</h3>
               <p class="card-subtitle-text">Ecuaciones Diferenciales Ordinarias</p>
               <p class="card-description">
-                Aproximación de soluciones para Problemas de Valor Inicial (PVI) mediante aproximación por pendientes tangentes $y_{n+1} = y_n + h \cdot f(t_n, y_n)$ y control del tamaño de paso $h$.
+                Aproximación de soluciones para Problemas de Valor Inicial (PVI) mediante aproximación por pendientes
+                tangentes $y_{n+1} = y_n + h \cdot f(t_n, y_n)$ y control del tamaño de paso $h$.
               </p>
             </div>
 
@@ -235,9 +257,10 @@
             <div class="card-footer">
               <span class="action-text">Ingresar a la aplicación</span>
               <div class="action-arrow">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="7" y1="17" x2="17" y2="7"/>
-                  <polyline points="7 7 17 7 17 17"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <line x1="7" y1="17" x2="17" y2="7" />
+                  <polyline points="7 7 17 7 17 17" />
                 </svg>
               </div>
             </div>
@@ -246,12 +269,14 @@
 
         <!-- Card 4: Pendiente -->
         <article class="card pending-card" data-card-id="4" id="card-pendiente">
-          <a href="#card-pendiente" class="card-link" id="pending-trigger" aria-label="TP 4: Pendiente de entrega (En desarrollo)">
+          <a href="#card-pendiente" class="card-link" id="pending-trigger"
+            aria-label="TP 4: Pendiente de entrega (En desarrollo)">
             <div class="card-header">
               <div class="card-icon icon-pending">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12 6 12 12 16 14"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
                 </svg>
               </div>
               <div class="status-chip status-pending">
@@ -265,7 +290,8 @@
               <h3 class="card-title">Trabajo Práctico Nº 4</h3>
               <p class="card-subtitle-text">Próxima entrega</p>
               <p class="card-description">
-                Este proyecto se encuentra actualmente en fase de desarrollo y calibración numérica. El enlace estará disponible tan pronto como sea finalizado.
+                Este proyecto se encuentra actualmente en fase de desarrollo y calibración numérica. El enlace estará
+                disponible tan pronto como sea finalizado.
               </p>
             </div>
 
@@ -277,9 +303,10 @@
             <div class="card-footer">
               <span class="action-text action-muted">Aún no disponible</span>
               <div class="action-arrow arrow-lock">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                 </svg>
               </div>
             </div>
@@ -312,4 +339,5 @@
   <!-- JavaScript -->
   <script src="script.js"></script>
 </body>
+
 </html>

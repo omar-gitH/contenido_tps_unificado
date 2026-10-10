@@ -345,7 +345,7 @@ a {
 .ambient-grid {
   position: absolute;
   inset: 0;
-  background-image: 
+  background-image:
     linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
     linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
   background-size: 40px 40px;
@@ -354,9 +354,17 @@ a {
 }
 
 @keyframes floatAmbient {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(40px, 30px) scale(1.08); }
-  100% { transform: translate(-30px, -20px) scale(0.95); }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(40px, 30px) scale(1.08);
+  }
+
+  100% {
+    transform: translate(-30px, -20px) scale(0.95);
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -794,8 +802,15 @@ a {
 }
 
 @keyframes pulseAnimation {
-  0% { transform: scale(1); opacity: 0.8; }
-  100% { transform: scale(2.6); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
 }
 
 .status-pending {
@@ -1088,7 +1103,8 @@ a {
   }
 
   .cards-grid {
-    grid-template-columns: 1fr; /* Una columna para máxima legibilidad táctil */
+    grid-template-columns: 1fr;
+    /* Una columna para máxima legibilidad táctil */
     gap: 1.25rem;
   }
 

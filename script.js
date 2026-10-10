@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if ('vibrate' in navigator) {
         try {
           navigator.vibrate(30);
-        } catch (e) {}
+        } catch (e) { }
       }
 
       setTheme(targetTheme, true);
