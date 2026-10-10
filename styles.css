@@ -1,0 +1,828 @@
+/* ==========================================================================
+   ANÁLISIS NUMÉRICO - GRUPO 11 - DESIGN SYSTEM & ESTILOS PRINCIPALES
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. VARIABLES Y TOKENS DE DISEÑO
+   -------------------------------------------------------------------------- */
+:root {
+  /* Paleta cromática profunda (Dark Theme) */
+  --bg-primary: #090d16;
+  --bg-secondary: #0f172a;
+  --bg-surface: rgba(17, 24, 39, 0.75);
+  --bg-surface-hover: rgba(30, 41, 59, 0.85);
+  --bg-surface-pending: rgba(15, 23, 42, 0.55);
+
+  /* Acentos de color */
+  --accent-cyan: #06b6d4;
+  --accent-blue: #3b82f6;
+  --accent-indigo: #6366f1;
+  --accent-purple: #8b5cf6;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+
+  /* Gradientes */
+  --gradient-title: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+  --gradient-card-border: linear-gradient(135deg, rgba(56, 189, 248, 0.4), rgba(99, 102, 241, 0.1));
+  --gradient-card-hover: linear-gradient(135deg, rgba(56, 189, 248, 0.8), rgba(168, 85, 247, 0.8));
+
+  /* Tipografía y Textos */
+  --font-primary: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-faint: #64748b;
+  --text-inverse: #0f172a;
+
+  /* Bordes y Sombras */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-active: rgba(56, 189, 248, 0.3);
+  --border-radius-sm: 8px;
+  --border-radius-md: 14px;
+  --border-radius-lg: 20px;
+  --border-radius-full: 9999px;
+
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+  --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 20px 35px -10px rgba(6, 182, 212, 0.25), 0 10px 20px -5px rgba(99, 102, 241, 0.2);
+
+  /* Transiciones */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET Y ESTILOS BASE
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Ocultar elementos para accesibilidad */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   3. AMBIENTE VISUAL DE FONDO (GLOWS & GRID)
+   -------------------------------------------------------------------------- */
+.ambient-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.4;
+  animation: floatAmbient 18s ease-in-out infinite alternate;
+}
+
+.glow-1 {
+  width: 550px;
+  height: 550px;
+  top: -150px;
+  left: 10%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.45) 0%, rgba(99, 102, 241, 0) 70%);
+}
+
+.glow-2 {
+  width: 600px;
+  height: 600px;
+  bottom: -150px;
+  right: 5%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(6, 182, 212, 0) 70%);
+  animation-duration: 22s;
+  animation-direction: alternate-reverse;
+}
+
+.ambient-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.8) 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.8) 0%, transparent 80%);
+}
+
+@keyframes floatAmbient {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, 30px) scale(1.08); }
+  100% { transform: translate(-30px, -20px) scale(0.95); }
+}
+
+/* --------------------------------------------------------------------------
+   4. ESTRUCTURA Y CONTENEDOR GENERAL
+   -------------------------------------------------------------------------- */
+.page-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --------------------------------------------------------------------------
+   5. HEADER PRINCIPAL
+   -------------------------------------------------------------------------- */
+.main-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.4rem 1.1rem;
+  border-radius: var(--border-radius-full);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--accent-cyan);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-cyan);
+}
+
+.main-title {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.25rem;
+}
+
+.gradient-text {
+  background: var(--gradient-title);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.subtitle {
+  max-width: 680px;
+  color: var(--text-muted);
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.subtitle strong {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* Metadatos en el encabezado */
+.status-summary {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--border-radius-md);
+  padding: 0.75rem 1.75rem;
+  backdrop-filter: blur(12px);
+  gap: 1.5rem;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.summary-number {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #38bdf8;
+  line-height: 1.2;
+}
+
+.summary-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.summary-divider {
+  width: 1px;
+  height: 28px;
+  background-color: var(--border-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   6. SECCIÓN DE TARJETAS (CARDS)
+   -------------------------------------------------------------------------- */
+.cards-section {
+  width: 100%;
+  margin-bottom: 3.5rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
+  width: 100%;
+}
+
+/* Estilo individual de Card */
+.card {
+  position: relative;
+  background: var(--bg-surface);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--gradient-card-border);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.6;
+  transition: opacity var(--transition-normal);
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(350px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(56, 189, 248, 0.08), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Card Interactiva (Disponible) */
+.live-card:hover {
+  transform: translateY(-8px);
+  background: var(--bg-surface-hover);
+  border-color: var(--border-active);
+  box-shadow: var(--shadow-hover);
+}
+
+.live-card:hover::before {
+  opacity: 1;
+  background: var(--gradient-card-hover);
+}
+
+/* Card Pendiente */
+.pending-card {
+  background: var(--bg-surface-pending);
+  border-style: dashed;
+  opacity: 0.88;
+}
+
+.pending-card:hover {
+  transform: translateY(-3px);
+  background: rgba(30, 41, 59, 0.7);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+/* Enlace contenedor */
+.card-link {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  height: 100%;
+  outline: none;
+  cursor: pointer;
+}
+
+.card-link:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 4px;
+  border-radius: var(--border-radius-lg);
+}
+
+/* Encabezado de la Card */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform var(--transition-bounce), background var(--transition-normal);
+}
+
+.card-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.icon-jacobi {
+  background: rgba(6, 182, 212, 0.12);
+  color: #38bdf8;
+  border-color: rgba(6, 182, 212, 0.25);
+}
+
+.icon-alometrico {
+  background: rgba(139, 92, 246, 0.12);
+  color: #c084fc;
+  border-color: rgba(139, 92, 246, 0.25);
+}
+
+.icon-euler {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+.icon-pending {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fbbf24;
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+.live-card:hover .card-icon {
+  transform: scale(1.1) rotate(-3deg);
+}
+
+/* Badges / Chips de estado */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--border-radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.status-active {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.pulse-indicator {
+  width: 7px;
+  height: 7px;
+  background-color: var(--accent-emerald);
+  border-radius: 50%;
+  position: relative;
+}
+
+.pulse-indicator::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background-color: inherit;
+  opacity: 0.6;
+  animation: pulseAnimation 2s infinite;
+}
+
+@keyframes pulseAnimation {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+.status-pending {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.clock-indicator {
+  font-size: 0.8rem;
+}
+
+/* Cuerpo de la Card */
+.card-body {
+  flex-grow: 1;
+  margin-bottom: 1.5rem;
+}
+
+.tp-number {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.pending-card .tp-number {
+  color: var(--accent-amber);
+}
+
+.card-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 0.25rem;
+  color: var(--text-main);
+  transition: color var(--transition-fast);
+}
+
+.live-card:hover .card-title {
+  color: #38bdf8;
+}
+
+.card-subtitle-text {
+  font-size: 0.95rem;
+  color: var(--accent-purple);
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.pending-card .card-subtitle-text {
+  color: var(--text-muted);
+}
+
+.card-description {
+  color: var(--text-muted);
+  font-size: 0.925rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+
+/* Etiquetas (Tags) */
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.tag {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--border-radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tag-muted {
+  color: var(--text-faint);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Pie de Card y Botón de Acción */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: auto;
+}
+
+.action-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: color var(--transition-fast);
+}
+
+.action-muted {
+  color: var(--text-faint);
+}
+
+.action-arrow {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+  transition: all var(--transition-bounce);
+}
+
+.action-arrow svg {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--transition-bounce);
+}
+
+.live-card:hover .action-arrow {
+  background: #38bdf8;
+  color: var(--text-inverse);
+  border-color: #38bdf8;
+  transform: scale(1.08);
+}
+
+.live-card:hover .action-arrow svg {
+  transform: translate(2px, -2px);
+}
+
+.arrow-lock {
+  color: var(--text-faint);
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* --------------------------------------------------------------------------
+   7. NOTIFICACIÓN TOAST FLOTANTE
+   -------------------------------------------------------------------------- */
+.toast-notification {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  max-width: 420px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 158, 11, 0.2);
+  backdrop-filter: blur(20px);
+  border-radius: var(--border-radius-md);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  z-index: 1000;
+  transform: translateY(120%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s;
+}
+
+.toast-notification.show {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.toast-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.toast-content {
+  flex-grow: 1;
+}
+
+.toast-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fbbf24;
+  margin-bottom: 0.2rem;
+}
+
+.toast-message {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--text-faint);
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 0.25rem;
+  transition: color var(--transition-fast);
+}
+
+.toast-close:hover {
+  color: var(--text-main);
+}
+
+/* --------------------------------------------------------------------------
+   8. FOOTER
+   -------------------------------------------------------------------------- */
+.main-footer {
+  margin-top: auto;
+  padding-top: 3rem;
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 0.875rem;
+}
+
+.footer-copy {
+  margin-bottom: 0.4rem;
+}
+
+.footer-copy strong {
+  color: var(--text-muted);
+}
+
+.footer-note {
+  font-size: 0.8rem;
+  color: #475569;
+}
+
+/* --------------------------------------------------------------------------
+   9. MEDIA QUERIES (RESPONSIVE DESIGN)
+   -------------------------------------------------------------------------- */
+
+/* Tablet y dispositivos medianos (hasta 1024px) */
+@media screen and (max-width: 1024px) {
+  .page-wrapper {
+    padding: 2.5rem 1.25rem 2rem;
+  }
+
+  .cards-grid {
+    gap: 1.25rem;
+  }
+
+  .card-link {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .card-title {
+    font-size: 1.3rem;
+  }
+}
+
+/* Tablets pequeñas y Móviles grandes (hasta 768px) */
+@media screen and (max-width: 768px) {
+  .main-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .status-summary {
+    width: 100%;
+    justify-content: space-around;
+    padding: 0.75rem 1rem;
+    gap: 0.75rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr; /* Una columna para máxima legibilidad táctil */
+    gap: 1.25rem;
+  }
+
+  .card-link {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .card-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .card-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .toast-notification {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1.25rem;
+    max-width: none;
+  }
+}
+
+/* Teléfonos móviles estándar y pequeños (hasta 480px) */
+@media screen and (max-width: 480px) {
+  .page-wrapper {
+    padding: 1.75rem 1rem 1.5rem;
+  }
+
+  .header-badge {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.85rem;
+  }
+
+  .main-title {
+    font-size: 1.85rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .summary-number {
+    font-size: 1.1rem;
+  }
+
+  .summary-label {
+    font-size: 0.68rem;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+  }
+
+  .card-description {
+    font-size: 0.875rem;
+  }
+
+  .card-tags {
+    gap: 0.35rem;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .action-text {
+    font-size: 0.825rem;
+  }
+
+  .action-arrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .action-arrow svg {
+    width: 15px;
+    height: 15px;
+  }
+}
