@@ -11,7 +11,7 @@ A continuación se detallan los módulos y trabajos prácticos disponibles en el
 | Módulo | Tema / Descripción | Estado | Enlace de Producción |
 | :--- | :--- | :---: | :--- |
 | **TP 01** | **Métodos de Jacobi y Gauss-Seidel**<br>Resolución iterativa de sistemas de ecuaciones lineales ($Ax = b$). | 🟢 Disponible | [analisis-numerico-tp-2.vercel.app](https://analisis-numerico-tp-2.vercel.app/) |
-| **TP 02** | **Ajuste Alométrico (Caso 4) - Clústeres de Animales**<br>Modelado no lineal, regresión de potencia y agrupamiento morfométrico. | 🟢 Disponible | [frontend-a7bb6ql8p-omar-gith.vercel.app](https://frontend-a7bb6ql8p-omar-gith.vercel.app/) |
+| **TP 02** | **Ajuste Alométrico (Caso 4) - Clústeres de Animales**<br>Modelado no lineal, regresión de potencia y agrupamiento morfométrico. | 🟢 Disponible | [frontend-eynikkih9-omar-gith.vercel.app](https://frontend-eynikkih9-omar-gith.vercel.app/) |
 | **TP 03** | **Método de Euler**<br>Aproximación numérica para Ecuaciones Diferenciales Ordinarias (EDO). | 🟢 Disponible | [metodo-euler-grupo11.vercel.app](https://metodo-euler-grupo11.vercel.app/) |
 | **TP 04** | **Trabajo Práctico Nº 4**<br>Próxima entrega académica. | ⏳ En desarrollo | Anclaje local (`#card-pendiente`) |
 
