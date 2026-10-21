@@ -42,3 +42,5 @@ dist/
 build/
 .cache/
 .temp/
+.vercel/
+

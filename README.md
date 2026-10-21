@@ -41,9 +41,31 @@ contenido_tps_unificado/
 ├── index.html        # Página principal de inicio con las 4 tarjetas interactivas
 ├── styles.css        # Hoja de estilos con variables, diseño responsivo y animaciones
 ├── script.js         # Lógica interactiva para eventos, accesibilidad y notificaciones
+├── vercel.json       # Configuración base de despliegue para Vercel
 ├── .gitignore        # Exclusiones de archivos del sistema operativo y editores
 └── README.md         # Documentación del proyecto
 ```
+
+---
+
+## 🌐 Despliegue en Vercel
+
+Este proyecto cuenta con `vercel.json` preconfigurado con encabezados de seguridad y optimización de caché para sitios estáticos:
+
+1. **Vía Dashboard (GitHub / GitLab / Bitbucket)**:
+   - Importá el repositorio en [vercel.com/new](https://vercel.com/new).
+   - Vercel detectará el proyecto estático de forma automática (no requiere configuración de Build Command ni Output Directory).
+   - Hacé clic en **Deploy**.
+
+2. **Vía Vercel CLI**:
+   - En la terminal del proyecto, ejecutá:
+     ```bash
+     npx vercel
+     ```
+   - Para desplegar a producción:
+     ```bash
+     npx vercel --prod
+     ```
 
 ---
 
